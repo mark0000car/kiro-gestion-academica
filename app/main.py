@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.database import verificar_conexion
-from app.routers import students
+from app.routers import students, teachers
 
 
 # ---------------------------------------------------------------------------
@@ -64,6 +64,7 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 
 app.include_router(students.router)
+app.include_router(teachers.router)
 
 # ---------------------------------------------------------------------------
 # Endpoints de utilidad

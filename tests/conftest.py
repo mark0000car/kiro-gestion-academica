@@ -97,8 +97,9 @@ def db_postgres():
     finally:
         session.close()
         # Limpia solo los datos del test, mantiene la tabla
-        from app.models import Estudiante
+        from app.models import Docente, Estudiante
         session2 = PGSessionLocal()
+        session2.query(Docente).delete()
         session2.query(Estudiante).delete()
         session2.commit()
         session2.close()

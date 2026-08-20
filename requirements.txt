@@ -10,3 +10,4 @@ pytest>=8.3.2
 pytest-asyncio>=0.23.8
 anyio>=4.4.0
 email-validator>=2.1.0
+hypothesis>=6.100.0
