@@ -73,35 +73,35 @@ Extender el sistema existente de Gestión Académica con un módulo de **Gestió
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 2.1, 2.2, 2.4, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.9, 3.10, 4.1, 4.2, 4.3, 4.4, 4.5, 5.1, 5.2_
 
 - [ ] 5. Registrar el router y actualizar `conftest.py`
-  - [-] 5.1 Agregar `teachers.router` en `app/main.py`
+  - [ ] 5.1 Agregar `teachers.router` en `app/main.py`
     - Agregar `from app.routers import teachers` junto a la importación de `students`
     - Agregar `app.include_router(teachers.router)` debajo de `app.include_router(students.router)`
     - _Requirements: 1.1, 2.1, 3.1, 4.1, 5.1_
 
-  - [-] 5.2 Actualizar el fixture `db_postgres` en `tests/conftest.py`
+  - [ ] 5.2 Actualizar el fixture `db_postgres` en `tests/conftest.py`
     - En la sección de limpieza, agregar `from app.models import Docente` y `session2.query(Docente).delete()` antes del commit
     - Mantener el `session2.query(Estudiante).delete()` existente sin modificarlo
     - _Requirements: 9.6, 9.7_
 
-- [~] 6. Checkpoint — Verificar que el servidor inicia y los endpoints responden
+- [ ] 6. Checkpoint — Verificar que el servidor inicia y los endpoints responden
   - Asegurarse de que `app/main.py`, `app/models.py`, `app/schemas.py`, `app/crud.py` y `app/routers/teachers.py` no tienen errores de importación. Ejecutar `pytest tests/test_students.py` para confirmar que el módulo de estudiantes no se rompió. Preguntar al usuario si hay dudas antes de continuar.
 
 - [ ] 7. Crear el script de migración SQL e `init_db.py`
-  - [-] 7.1 Crear `migrations/create_teachers_table.sql`
+  - [ ] 7.1 Crear `migrations/create_teachers_table.sql`
     - DDL idempotente con `CREATE TABLE IF NOT EXISTS docentes` con columnas `id SERIAL PRIMARY KEY`, `nombre VARCHAR(200) NOT NULL`, `email VARCHAR(254) NOT NULL`, `especialidad VARCHAR(200) NOT NULL`, `fecha_creacion TIMESTAMPTZ NOT NULL DEFAULT NOW()`, `activo BOOLEAN NOT NULL DEFAULT TRUE`
     - Constraints nombrados: `CONSTRAINT uq_docentes_email UNIQUE (email)`, `CONSTRAINT uq_docentes_especialidad UNIQUE (especialidad)`
     - Índices con `CREATE INDEX IF NOT EXISTS idx_docentes_email ON docentes (email)` y `CREATE INDEX IF NOT EXISTS idx_docentes_especialidad ON docentes (especialidad)`
     - Comentarios `COMMENT ON TABLE` y `COMMENT ON COLUMN` para cada columna
     - _Requirements: 7.1, 7.2, 7.5_
 
-  - [-] 7.2 Crear `init_db.py` en la raíz del proyecto
+  - [ ] 7.2 Crear `init_db.py` en la raíz del proyecto
     - Leer `migrations/create_teachers_table.sql` con `pathlib.Path`
     - Ejecutar con `engine.begin()` y `conn.execute(text(sql))`
     - Reportar éxito en stdout con `print`; capturar excepciones y reportar en `sys.stderr` con `sys.exit(1)`
     - _Requirements: 7.3, 7.4, 7.5_
 
 - [ ] 8. Crear las pruebas unitarias en `tests/test_teachers.py`
-  - [~] 8.1 Implementar los casos de prueba de ejemplo para `POST /teachers/`
+  - [ ] 8.1 Implementar los casos de prueba de ejemplo para `POST /teachers/`
     - Caso de éxito HTTP 201: verificar `id`, `activo=true`, `fecha_creacion`, `nombre`, `email`, `especialidad`
     - Caso HTTP 409 por email duplicado: mensaje debe contener `"email"`
     - Caso HTTP 409 por especialidad duplicada: mensaje debe contener `"especialidad"`
@@ -111,13 +111,13 @@ Extender el sistema existente de Gestión Académica con un módulo de **Gestió
     - Caso HTTP 422 por `email` con formato inválido
     - _Requirements: 9.1, 9.2, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6_
 
-  - [~] 8.2 Implementar los casos de prueba de ejemplo para `GET /teachers/{id}` y `GET /teachers/`
+  - [ ] 8.2 Implementar los casos de prueba de ejemplo para `GET /teachers/{id}` y `GET /teachers/`
     - `GET /teachers/{id}`: caso 200 con datos correctos, caso 200 con `activo=false`, caso 404, caso 422 con id no entero
     - `GET /teachers/`: caso 200 lista vacía (`total=0`, `docentes=[]`), caso 200 con paginación (verificar `total`, `pagina`, `por_pagina`, longitud de `docentes`), caso filtro `activo=true`, caso filtro `activo=false`, caso 422 con `por_pagina>100`, caso 422 con `pagina<1`
     - Verificar que `docentes` está ordenado por `id` ascendente en el caso paginado
     - _Requirements: 9.1, 9.2, 2.1, 2.2, 2.3, 2.4, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.9, 3.10_
 
-  - [~] 8.3 Implementar los casos de prueba de ejemplo para `PUT /teachers/{id}` y `DELETE /teachers/{id}`
+  - [ ] 8.3 Implementar los casos de prueba de ejemplo para `PUT /teachers/{id}` y `DELETE /teachers/{id}`
     - `PUT /teachers/{id}`: caso 200 con actualización parcial (solo `nombre`), caso 200 con body vacío `{}` (no-op, sin cambios), caso 404, caso 409 por email duplicado, caso 409 por especialidad duplicada, caso 422 por email inválido
     - `DELETE /teachers/{id}`: caso 200 con mensaje que contiene el id, verificar que `GET /teachers/{id}` devuelve 404 tras la eliminación, verificar que no aparece en `GET /teachers/`, caso 404, caso 422 con id no entero
     - _Requirements: 9.1, 9.2, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 5.1, 5.2, 5.3_
@@ -155,11 +155,11 @@ Extender el sistema existente de Gestión Académica con un módulo de **Gestió
     - Verificar que los constraints de unicidad (`email`, `especialidad`) producen 409 a nivel de PostgreSQL real
     - _Requirements: 9.6, 9.7_
 
-- [~] 10. Checkpoint — Ejecutar la suite de pruebas unitarias completa
+- [ ] 10. Checkpoint — Ejecutar la suite de pruebas unitarias completa
   - Ejecutar `pytest tests/test_teachers.py -v` y verificar que todos los casos pasan en menos de 60 segundos y sin errores de conexión a PostgreSQL. Preguntar al usuario si hay dudas antes de continuar.
 
 - [ ] 11. Actualizar documentación y `requirements.txt`
-  - [~] 11.1 Actualizar el `README.md` con la documentación del módulo de docentes
+  - [ ] 11.1 Actualizar el `README.md` con la documentación del módulo de docentes
     - Sección con los cinco endpoints: método HTTP, ruta, descripción, códigos de respuesta éxito y error
     - Sección con el modelo de datos `Docente`: campos, tipos, longitudes máximas, restricciones de unicidad, valores por defecto
     - Ejemplos `curl` con al menos un ejemplo por endpoint (datos válidos y respuesta esperada)
@@ -167,7 +167,7 @@ Extender el sistema existente de Gestión Académica con un módulo de **Gestió
     - Comandos exactos: `python init_db.py` y `pytest tests/test_teachers.py` con resultado esperado
     - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5, 10.6_
 
-- [~] 12. Checkpoint final — Verificar integridad completa del módulo
+- [ ] 12. Checkpoint final — Verificar integridad completa del módulo
   - Ejecutar `pytest tests/test_students.py tests/test_teachers.py -v` para confirmar que ambos módulos pasan sin regresiones. Preguntar al usuario si hay dudas antes de cerrar la implementación.
 
 ---
