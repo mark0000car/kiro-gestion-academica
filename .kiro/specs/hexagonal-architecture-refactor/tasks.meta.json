@@ -1,0 +1,320 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Create domain exceptions module": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247515960
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247526145
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787248390801
+      }
+    ],
+    "1.2 Create `Estudiante` and `Docente` domain entities": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247516326
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247529846
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787248394288
+      }
+    ],
+    "1.3 Create domain value objects": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247516426
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247533523
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787248397569
+      }
+    ],
+    "2. Checkpoint — Phase 1 complete": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247516600
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787248409882
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787248705949
+      }
+    ],
+    "3.1 Create `EstudianteRepository` Protocol": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247516692
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787248721671
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787248892357
+      }
+    ],
+    "3.2 Create `DocenteRepository` Protocol": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247516768
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787248725351
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787248896065
+      }
+    ],
+    "4. Checkpoint — Phase 2 complete": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247516891
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787248900605
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787249066757
+      }
+    ],
+    "5.1 Create in-memory repository fakes": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247517000
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787249071805
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787249813652
+      }
+    ],
+    "5.2 Implement student use cases": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247517090
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787249817407
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787250356455
+      }
+    ],
+    "5.3 Implement teacher use cases": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247517169
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787249821066
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787250361471
+      }
+    ],
+    "6. Checkpoint — Phase 3 complete": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247517292
+      },
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787250365825
+      }
+    ],
+    "7.1 Create infrastructure config modules": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247517359
+      }
+    ],
+    "7.2 Create ORM models": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247517424
+      }
+    ],
+    "7.3 Implement `SQLAlchemyEstudianteRepository`": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247517491
+      }
+    ],
+    "7.4 Implement `SQLAlchemyDocenteRepository`": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247517569
+      }
+    ],
+    "8. Checkpoint — Phase 4 complete": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247517655
+      }
+    ],
+    "9.1 Create Pydantic HTTP schemas": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247517737
+      }
+    ],
+    "9.2 Create HTTP dependencies module": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247517814
+      }
+    ],
+    "9.3 Implement students HTTP router": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247517893
+      }
+    ],
+    "9.4 Implement teachers HTTP router": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247517968
+      }
+    ],
+    "10. Checkpoint — Phase 5 complete": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247518042
+      }
+    ],
+    "11.1 Update `app/main.py`": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247518123
+      }
+    ],
+    "11.2 Update `tests/conftest.py`": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247518237
+      }
+    ],
+    "12. Checkpoint — Phase 6 complete": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247518329
+      }
+    ],
+    "13.1 Verify all public symbols are accessible from new paths": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247518401
+      }
+    ],
+    "13.2 Delete legacy flat modules": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247518468
+      }
+    ],
+    "14. Final Checkpoint — Migration complete": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787247518542
+      }
+    ],
+    "1. Phase 1 — Domain Layer: entities, value objects, exceptions": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787248397710
+      }
+    ],
+    "3. Phase 2 — Application Ports": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787248896150
+      }
+    ],
+    "5. Phase 3 — Use Cases + In-Memory Repositories": [
+      {
+        "executionId": "5e9064d8-1ad6-4110-81f2-7825feb14621",
+        "chatSessionId": "sess_ea1c50e2-992c-473a-b7a5-5b9cb4ad73c7",
+        "timestamp": 1787250361583
+      }
+    ]
+  }
+}

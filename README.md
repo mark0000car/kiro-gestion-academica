@@ -1,28 +1,55 @@
-# Sistema de Gestión de Estudiantes
+# Sistema de Gestión Académica
 
-API RESTful construida con **FastAPI** y **PostgreSQL** para el registro y administración de estudiantes.
+API RESTful construida con **FastAPI** y **PostgreSQL** para el registro y administración de estudiantes y docentes, siguiendo una arquitectura hexagonal (Ports & Adapters).
 
 ---
 
 ## Estructura del proyecto
 
 ```
-gestion-academica/
+kiro-gestion-academica/
 ├── app/
 │   ├── __init__.py
-│   ├── main.py          # Punto de entrada FastAPI
-│   ├── config.py        # Variables de entorno (pydantic-settings)
-│   ├── database.py      # Motor SQLAlchemy + pool de conexiones
-│   ├── models.py        # Modelo ORM Estudiante
-│   ├── schemas.py       # Esquemas Pydantic (validación)
-│   ├── crud.py          # Capa de acceso a datos
+│   ├── main.py              # Punto de entrada FastAPI
+│   ├── config.py            # Variables de entorno (pydantic-settings)
+│   ├── database.py          # Motor SQLAlchemy + pool de conexiones
+│   ├── models.py            # Modelos ORM (Estudiante, Docente)
+│   ├── schemas.py           # Esquemas Pydantic (validación E/S)
+│   ├── crud.py              # Capa de acceso a datos
+│   ├── domain/
+│   │   ├── entities/
+│   │   │   ├── student.py   # Entidad de dominio Estudiante
+│   │   │   └── teacher.py   # Entidad de dominio Docente
+│   │   ├── exceptions.py    # Excepciones de dominio
+│   │   └── value_objects.py # Objetos de valor
+│   ├── application/
+│   │   ├── ports/
+│   │   │   ├── student_repository.py  # Puerto del repositorio de estudiantes
+│   │   │   └── teacher_repository.py  # Puerto del repositorio de docentes
+│   │   └── use_cases/
+│   │       ├── student/
+│   │       │   ├── crear_estudiante.py
+│   │       │   ├── obtener_estudiante.py
+│   │       │   ├── listar_estudiantes.py
+│   │       │   ├── actualizar_estudiante.py
+│   │       │   └── eliminar_estudiante.py
+│   │       └── teacher/
+│   │           ├── crear_docente.py
+│   │           ├── obtener_docente.py
+│   │           ├── listar_docentes.py
+│   │           ├── actualizar_docente.py
+│   │           └── eliminar_docente.py
 │   └── routers/
-│       └── students.py  # Endpoints CRUD /students
+│       ├── students.py      # Endpoints CRUD /students
+│       └── teachers.py      # Endpoints CRUD /teachers
 ├── migrations/
 │   └── create_students_table.sql
 ├── tests/
 │   ├── conftest.py          # Fixtures (SQLite en memoria + PostgreSQL)
-│   ├── test_students.py     # Pruebas unitarias (sin BD real)
+│   ├── fakes/
+│   │   ├── in_memory_student_repository.py
+│   │   └── in_memory_teacher_repository.py
+│   ├── test_students.py     # Pruebas unitarias de estudiantes
 │   └── test_integration.py  # Pruebas de integración (PostgreSQL real)
 ├── .env
 ├── .env.example
@@ -30,6 +57,18 @@ gestion-academica/
 ├── requirements.txt
 └── README.md
 ```
+
+---
+
+## Arquitectura
+
+El proyecto implementa **Arquitectura Hexagonal (Ports & Adapters)**:
+
+| Capa | Responsabilidad |
+|------|----------------|
+| **Domain** | Entidades de negocio (`Estudiante`, `Docente`) y excepciones de dominio |
+| **Application** | Casos de uso e interfaces de repositorio (puertos) |
+| **Infrastructure** | Adaptadores: ORM SQLAlchemy, routers FastAPI, esquemas Pydantic |
 
 ---
 
@@ -41,12 +80,12 @@ gestion-academica/
 
 ---
 
-## Instalación y ejecución paso a paso
+## Instalación y ejecución
 
 ### 1. Clonar o descargar el proyecto
 
 ```bash
-cd gestion-academica
+cd kiro-gestion-academica
 ```
 
 ### 2. Crear y activar un entorno virtual
@@ -76,7 +115,7 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=gac
 DB_USER=postgres
-DB_PASSWORD=postgres
+DB_PASSWORD=XXXXXX
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/gac
 API_PORT=8000
 ```
@@ -84,7 +123,6 @@ API_PORT=8000
 ### 5. Crear la base de datos en PostgreSQL
 
 ```sql
--- Conectarse a PostgreSQL como superusuario y ejecutar:
 CREATE DATABASE gac;
 ```
 
@@ -94,19 +132,14 @@ CREATE DATABASE gac;
 # Opción A: usando psql
 psql -U postgres -d gac -f migrations/create_students_table.sql
 
-# Opción B: dejar que SQLAlchemy cree la tabla automáticamente
-# (se hace al iniciar la aplicación si se descomenta en main.py)
+# Opción B: dejar que SQLAlchemy cree las tablas automáticamente al iniciar
 ```
-
-> **Nota:** La API crea la tabla automáticamente al iniciar si usas el comando de abajo y la tabla no existe. El script SQL es la forma recomendada en producción.
 
 ### 7. Iniciar la API
 
 ```bash
 uvicorn app.main:app --reload --port 8000
 ```
-
-La API quedará disponible en:
 
 | Recurso | URL |
 |---------|-----|
@@ -119,6 +152,8 @@ La API quedará disponible en:
 
 ## Endpoints disponibles
 
+### Estudiantes
+
 | Método | Ruta | Descripción |
 |--------|------|-------------|
 | `POST` | `/students/` | Crear un nuevo estudiante |
@@ -126,24 +161,45 @@ La API quedará disponible en:
 | `GET` | `/students/{id}` | Obtener por ID |
 | `PUT` | `/students/{id}` | Actualizar datos |
 | `DELETE` | `/students/{id}` | Eliminar estudiante |
-| `GET` | `/health` | Estado de la API y BD |
 
-### Parámetros de paginación (`GET /students/`)
+### Docentes
+
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| `POST` | `/teachers/` | Crear un nuevo docente |
+| `GET` | `/teachers/` | Listar todos (paginado) |
+| `GET` | `/teachers/{id}` | Obtener por ID |
+| `PUT` | `/teachers/{id}` | Actualizar datos |
+| `DELETE` | `/teachers/{id}` | Eliminar docente |
+
+### Utilidades
+
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| `GET` | `/` | Bienvenida y links de documentación |
+| `GET` | `/health` | Estado de la API y la base de datos |
+
+---
+
+## Parámetros de paginación
+
+Aplica a `GET /students/` y `GET /teachers/`:
 
 | Parámetro | Tipo | Default | Descripción |
 |-----------|------|---------|-------------|
 | `pagina` | int | 1 | Número de página (≥ 1) |
 | `por_pagina` | int | 10 | Registros por página (1-100) |
-| `activo` | bool | null | Filtrar por estado |
+| `activo` | bool | null | Filtrar por estado activo/inactivo |
 
-### Códigos HTTP utilizados
+---
+
+## Códigos HTTP utilizados
 
 | Código | Significado |
 |--------|-------------|
 | 200 | Operación exitosa |
 | 201 | Recurso creado |
-| 400 | Solicitud inválida (cuerpo vacío en PUT) |
-| 404 | Estudiante no encontrado |
+| 404 | Recurso no encontrado |
 | 409 | Conflicto (email o documento duplicado) |
 | 422 | Error de validación Pydantic |
 | 500 | Error interno del servidor |
@@ -151,7 +207,9 @@ La API quedará disponible en:
 
 ---
 
-## Modelo de datos
+## Modelos de datos
+
+### Estudiante
 
 ```json
 {
@@ -165,16 +223,35 @@ La API quedará disponible en:
 }
 ```
 
-### Validaciones aplicadas
-
-- `nombre`: requerido, máx. 200 caracteres, no puede estar vacío.
+**Validaciones:**
+- `nombre`: requerido, máx. 200 caracteres.
 - `direccion`: requerido, no puede estar vacía.
-- `numero_documento`: requerido, solo letras, números y guiones, 3-30 caracteres, único.
-- `email`: formato de email válido, único en el sistema.
+- `numero_documento`: solo letras, números y guiones (3-30 caracteres), único.
+- `email`: formato válido, único en el sistema.
+
+### Docente
+
+```json
+{
+  "id": 1,
+  "nombre": "Carlos Martínez",
+  "email": "carlos.martinez@ejemplo.com",
+  "especialidad": "Matemáticas",
+  "activo": true,
+  "fecha_creacion": "2024-01-15T10:30:00Z"
+}
+```
+
+**Validaciones:**
+- `nombre`: requerido, máx. 200 caracteres.
+- `email`: formato válido, único en el sistema.
+- `especialidad`: requerido, máx. 200 caracteres, único en el sistema.
 
 ---
 
 ## Ejemplos de uso con curl
+
+### Estudiantes
 
 ```bash
 # Crear estudiante
@@ -182,11 +259,11 @@ curl -X POST http://localhost:8000/students/ \
   -H "Content-Type: application/json" \
   -d '{"nombre":"Ana García","direccion":"Calle 10","numero_documento":"1020304050","email":"ana@ejemplo.com"}'
 
-# Obtener por ID
-curl http://localhost:8000/students/1
-
 # Listar (página 1, 5 por página)
 curl "http://localhost:8000/students/?pagina=1&por_pagina=5"
+
+# Obtener por ID
+curl http://localhost:8000/students/1
 
 # Actualizar
 curl -X PUT http://localhost:8000/students/1 \
@@ -197,31 +274,44 @@ curl -X PUT http://localhost:8000/students/1 \
 curl -X DELETE http://localhost:8000/students/1
 ```
 
+### Docentes
+
+```bash
+# Crear docente
+curl -X POST http://localhost:8000/teachers/ \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Carlos Martínez","email":"carlos@ejemplo.com","especialidad":"Matemáticas"}'
+
+# Listar (página 1, 10 por página, solo activos)
+curl "http://localhost:8000/teachers/?pagina=1&por_pagina=10&activo=true"
+
+# Obtener por ID
+curl http://localhost:8000/teachers/1
+
+# Actualizar
+curl -X PUT http://localhost:8000/teachers/1 \
+  -H "Content-Type: application/json" \
+  -d '{"especialidad":"Física","activo":false}'
+
+# Eliminar
+curl -X DELETE http://localhost:8000/teachers/1
+```
+
 ---
 
 ## Pruebas
 
-### Ejecutar todas las pruebas (unitarias, sin PostgreSQL)
-
 ```bash
+# Pruebas unitarias (sin PostgreSQL)
 pytest tests/test_students.py -v
-```
 
-### Ejecutar pruebas de integración (requiere PostgreSQL)
-
-```bash
+# Pruebas de integración (requiere PostgreSQL)
 pytest tests/test_integration.py -v
-```
 
-### Ejecutar todas las pruebas
-
-```bash
+# Todas las pruebas
 pytest -v
-```
 
-### Ejecutar con reporte de cobertura
-
-```bash
+# Con reporte de cobertura
 pip install pytest-cov
 pytest --cov=app --cov-report=term-missing
 ```
@@ -230,7 +320,7 @@ Las pruebas de integración se saltan automáticamente si PostgreSQL no está di
 
 ---
 
-## Variables de entorno — referencia completa
+## Variables de entorno
 
 | Variable | Descripción | Valor por defecto |
 |----------|-------------|-------------------|
@@ -256,4 +346,3 @@ Las pruebas de integración se saltan automáticamente si PostgreSQL no está di
 | Configuración | pydantic-settings |
 | Pruebas | pytest + httpx |
 | BD pruebas unitarias | SQLite en memoria |
-# kiro-gestion-academica
