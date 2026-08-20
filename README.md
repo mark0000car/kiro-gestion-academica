@@ -50,6 +50,7 @@ kiro-gestion-academica/
 │   │   ├── in_memory_student_repository.py
 │   │   └── in_memory_teacher_repository.py
 │   ├── test_students.py     # Pruebas unitarias de estudiantes
+│   ├── test_teachers.py     # Pruebas unitarias de docentes
 │   └── test_integration.py  # Pruebas de integración (PostgreSQL real)
 ├── .env
 ├── .env.example
@@ -301,9 +302,62 @@ curl -X DELETE http://localhost:8000/teachers/1
 
 ## Pruebas
 
+### Archivos de prueba
+
+| Archivo | Tipo | Descripción |
+|---------|------|-------------|
+| `tests/test_students.py` | Unitaria | 39 pruebas para endpoints `/students/` — usa SQLite en memoria |
+| `tests/test_teachers.py` | Unitaria | 39 pruebas para endpoints `/teachers/` — usa SQLite en memoria |
+| `tests/test_integration.py` | Integración | 19 pruebas sobre PostgreSQL real (estudiantes + docentes) |
+
+### Cobertura de pruebas unitarias
+
+**Estudiantes y Docentes** siguen la misma estructura de 5 grupos:
+
+| Grupo | Tests | Escenarios cubiertos |
+|-------|-------|----------------------|
+| `TestCrear*` | 10 | Creación exitosa, duplicados (email/documento o especialidad), email inválido, campos faltantes/vacíos, campos en respuesta |
+| `TestObtener*` | 4 | Por ID existente, 404, ID no numérico, datos completos |
+| `TestListar*` | 8 | Lista vacía, con datos, paginación, 2ª página, filtro `activo`, límite 100, página 0, estructura de respuesta |
+| `TestActualizar*` | 12 | Cada campo por separado, múltiples campos, no existente, conflictos de unicidad, body vacío (no-op), validaciones, preservación de campos |
+| `TestEliminar*` | 5 | Exitoso, 404 post-delete, no existente, reducción de total, ID inválido |
+
+### Cobertura de pruebas de integración
+
+| Test | Descripción |
+|------|-------------|
+| `test_conexion_postgresql` | Conexión real a PostgreSQL |
+| `test_tabla_estudiantes_existe` | Existencia de tabla `estudiantes` |
+| `test_tabla_docentes_existe` | Existencia de tabla `docentes` |
+| `test_pg_crear_y_obtener_estudiante` | CRUD completo estudiante |
+| `test_pg_email_duplicado_estudiante` | Conflicto 409 en email |
+| `test_pg_documento_duplicado` | Conflicto 409 en documento |
+| `test_pg_listar_estudiantes_paginado` | Paginación real |
+| `test_pg_actualizar_estudiante` | Actualización parcial |
+| `test_pg_eliminar_estudiante` | Eliminación y 404 posterior |
+| `test_pg_actualizacion_parcial_no_modifica_otros_campos_estudiante` | Preservación de campos |
+| `test_pg_crear_y_obtener_docente` | CRUD completo docente |
+| `test_pg_email_duplicado_docente` | Conflicto 409 en email de docente |
+| `test_pg_especialidad_duplicada` | Conflicto 409 en especialidad |
+| `test_pg_listar_docentes_paginado` | Paginación real de docentes |
+| `test_pg_actualizar_docente` | Actualización de nombre |
+| `test_pg_actualizar_especialidad_docente` | Actualización de especialidad |
+| `test_pg_eliminar_docente` | Eliminación y 404 posterior |
+| `test_pg_actualizacion_parcial_no_modifica_otros_campos_docente` | Preservación de campos |
+| `test_pg_docente_cuerpo_vacio_no_modifica` | Body vacío es no-op |
+| `test_pg_health_check_con_bd_real` | Health check con BD real |
+
+### Comandos
+
 ```bash
-# Pruebas unitarias (sin PostgreSQL)
+# Pruebas unitarias de estudiantes (sin PostgreSQL)
 pytest tests/test_students.py -v
+
+# Pruebas unitarias de docentes (sin PostgreSQL)
+pytest tests/test_teachers.py -v
+
+# Todas las pruebas unitarias
+pytest tests/test_students.py tests/test_teachers.py -v
 
 # Pruebas de integración (requiere PostgreSQL)
 pytest tests/test_integration.py -v
