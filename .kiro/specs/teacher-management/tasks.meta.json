@@ -1,0 +1,215 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Agregar `hypothesis>=6.100.0` al archivo `requirements.txt`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241024596
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241035377
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241486236
+      }
+    ],
+    "1.2 Agregar la clase `Docente(Base)` en `app/models.py`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241025749
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241038438
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241489975
+      }
+    ],
+    "2.1 Agregar `DocenteBase`, `DocenteCreate`, `DocenteUpdate`, `DocenteResponse` y `DocentePaginado` en `app/schemas.py`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241025887
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241498496
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241571817
+      }
+    ],
+    "3.1 Implementar `crear_docente`, `obtener_docente_por_id`, `obtener_docente_por_email`, `obtener_docente_por_especialidad`, `listar_docentes`, `actualizar_docente` y `eliminar_docente`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241026064
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241580849
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241747382
+      }
+    ],
+    "4.1 Implementar los cinco endpoints CRUD y helpers en `app/routers/teachers.py`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241026222
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241769290
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241947845
+      }
+    ],
+    "5.1 Agregar `teachers.router` en `app/main.py`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241026363
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241953320
+      }
+    ],
+    "5.2 Actualizar el fixture `db_postgres` en `tests/conftest.py`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241026607
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241957681
+      }
+    ],
+    "6. Checkpoint — Verificar que el servidor inicia y los endpoints responden": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241026810
+      }
+    ],
+    "7.1 Crear `migrations/create_teachers_table.sql`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241026936
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241961959
+      }
+    ],
+    "7.2 Crear `init_db.py` en la raíz del proyecto": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241027051
+      },
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241966462
+      }
+    ],
+    "8.1 Implementar los casos de prueba de ejemplo para `POST /teachers/`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241027160
+      }
+    ],
+    "8.2 Implementar los casos de prueba de ejemplo para `GET /teachers/{id}` y `GET /teachers/`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241027278
+      }
+    ],
+    "8.3 Implementar los casos de prueba de ejemplo para `PUT /teachers/{id}` y `DELETE /teachers/{id}`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241027431
+      }
+    ],
+    "10. Checkpoint — Ejecutar la suite de pruebas unitarias completa": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241027570
+      }
+    ],
+    "11.1 Actualizar el `README.md` con la documentación del módulo de docentes": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241027760
+      }
+    ],
+    "12. Checkpoint final — Verificar integridad completa del módulo": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241027920
+      }
+    ],
+    "1. Agregar dependencia `hypothesis` y modelo ORM `Docente`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241490156
+      }
+    ],
+    "2. Agregar schemas Pydantic v2 para Docente": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241571998
+      }
+    ],
+    "3. Agregar funciones CRUD para Docente en `app/crud.py`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241747735
+      }
+    ],
+    "4. Crear el router `app/routers/teachers.py`": [
+      {
+        "executionId": "03f68908-8cd6-4ae9-86d2-a1b7bbdbe402",
+        "chatSessionId": "sess_4d1d53f4-ddea-4df6-9b62-983905691c34",
+        "timestamp": 1787241948011
+      }
+    ]
+  }
+}
