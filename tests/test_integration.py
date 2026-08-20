@@ -9,6 +9,10 @@ import pytest
 
 from tests.conftest import skip_if_no_pg
 
+# ---------------------------------------------------------------------------
+# Datos de prueba
+# ---------------------------------------------------------------------------
+
 ESTUDIANTE = {
     "nombre": "Laura Martínez",
     "direccion": "Cra 5 # 15-20, Medellín",
@@ -21,6 +25,18 @@ ESTUDIANTE_2 = {
     "direccion": "Calle 80 # 10-05, Cali",
     "numero_documento": "INT-002",
     "email": "pedro.ruiz@integracion.com",
+}
+
+DOCENTE = {
+    "nombre": "Ana Rodríguez",
+    "email": "ana.rodriguez@integracion.com",
+    "especialidad": "Historia",
+}
+
+DOCENTE_2 = {
+    "nombre": "Miguel Torres",
+    "email": "miguel.torres@integracion.com",
+    "especialidad": "Geografía",
 }
 
 
@@ -45,8 +61,17 @@ def test_tabla_estudiantes_existe(db_postgres):
     assert "estudiantes" in tablas
 
 
+@skip_if_no_pg
+def test_tabla_docentes_existe(db_postgres):
+    """Verifica que la tabla 'docentes' existe en la BD."""
+    from sqlalchemy import inspect
+    inspector = inspect(db_postgres.get_bind())
+    tablas = inspector.get_table_names()
+    assert "docentes" in tablas
+
+
 # ===========================================================================
-# CRUD completo sobre PostgreSQL real
+# CRUD Estudiantes sobre PostgreSQL real
 # ===========================================================================
 
 @skip_if_no_pg
@@ -62,7 +87,7 @@ def test_pg_crear_y_obtener_estudiante(client_pg):
 
 
 @skip_if_no_pg
-def test_pg_email_duplicado(client_pg):
+def test_pg_email_duplicado_estudiante(client_pg):
     client_pg.post("/students/", json=ESTUDIANTE)
     duplicado = {**ESTUDIANTE, "numero_documento": "INT-DUP"}
     resp = client_pg.post("/students/", json=duplicado)
@@ -78,7 +103,7 @@ def test_pg_documento_duplicado(client_pg):
 
 
 @skip_if_no_pg
-def test_pg_listar_paginado(client_pg):
+def test_pg_listar_estudiantes_paginado(client_pg):
     client_pg.post("/students/", json=ESTUDIANTE)
     client_pg.post("/students/", json=ESTUDIANTE_2)
     resp = client_pg.get("/students/?pagina=1&por_pagina=1")
@@ -104,16 +129,107 @@ def test_pg_eliminar_estudiante(client_pg):
 
 
 @skip_if_no_pg
-def test_pg_health_check_con_bd_real(client_pg):
-    resp = client_pg.get("/health")
-    assert resp.status_code == 200
-    assert resp.json()["base_de_datos"] == "ok"
-
-
-@skip_if_no_pg
-def test_pg_actualizacion_parcial_no_modifica_otros_campos(client_pg):
+def test_pg_actualizacion_parcial_no_modifica_otros_campos_estudiante(client_pg):
     creado = client_pg.post("/students/", json=ESTUDIANTE).json()
     client_pg.put(f"/students/{creado['id']}", json={"direccion": "Nueva Dirección 123"})
     obtenido = client_pg.get(f"/students/{creado['id']}").json()
     assert obtenido["email"] == ESTUDIANTE["email"]
     assert obtenido["numero_documento"] == ESTUDIANTE["numero_documento"]
+
+
+# ===========================================================================
+# CRUD Docentes sobre PostgreSQL real
+# ===========================================================================
+
+@skip_if_no_pg
+def test_pg_crear_y_obtener_docente(client_pg):
+    resp = client_pg.post("/teachers/", json=DOCENTE)
+    assert resp.status_code == 201
+    data = resp.json()
+    assert data["email"] == DOCENTE["email"]
+    assert data["especialidad"] == DOCENTE["especialidad"]
+
+    obtenido = client_pg.get(f"/teachers/{data['id']}").json()
+    assert obtenido["id"] == data["id"]
+    assert obtenido["nombre"] == DOCENTE["nombre"]
+
+
+@skip_if_no_pg
+def test_pg_email_duplicado_docente(client_pg):
+    client_pg.post("/teachers/", json=DOCENTE)
+    duplicado = {**DOCENTE, "especialidad": "Literatura"}
+    resp = client_pg.post("/teachers/", json=duplicado)
+    assert resp.status_code == 409
+    assert "email" in resp.json()["detail"].lower()
+
+
+@skip_if_no_pg
+def test_pg_especialidad_duplicada(client_pg):
+    client_pg.post("/teachers/", json=DOCENTE)
+    duplicado = {**DOCENTE, "email": "otro.docente@integracion.com"}
+    resp = client_pg.post("/teachers/", json=duplicado)
+    assert resp.status_code == 409
+    assert "especialidad" in resp.json()["detail"].lower()
+
+
+@skip_if_no_pg
+def test_pg_listar_docentes_paginado(client_pg):
+    client_pg.post("/teachers/", json=DOCENTE)
+    client_pg.post("/teachers/", json=DOCENTE_2)
+    resp = client_pg.get("/teachers/?pagina=1&por_pagina=1")
+    data = resp.json()
+    assert data["total"] >= 2
+    assert len(data["docentes"]) == 1
+
+
+@skip_if_no_pg
+def test_pg_actualizar_docente(client_pg):
+    creado = client_pg.post("/teachers/", json=DOCENTE).json()
+    resp = client_pg.put(f"/teachers/{creado['id']}", json={"nombre": "Ana Martínez"})
+    assert resp.status_code == 200
+    assert resp.json()["nombre"] == "Ana Martínez"
+
+
+@skip_if_no_pg
+def test_pg_actualizar_especialidad_docente(client_pg):
+    creado = client_pg.post("/teachers/", json=DOCENTE).json()
+    resp = client_pg.put(f"/teachers/{creado['id']}", json={"especialidad": "Arte"})
+    assert resp.status_code == 200
+    assert resp.json()["especialidad"] == "Arte"
+
+
+@skip_if_no_pg
+def test_pg_eliminar_docente(client_pg):
+    creado = client_pg.post("/teachers/", json=DOCENTE).json()
+    resp = client_pg.delete(f"/teachers/{creado['id']}")
+    assert resp.status_code == 200
+    assert client_pg.get(f"/teachers/{creado['id']}").status_code == 404
+
+
+@skip_if_no_pg
+def test_pg_actualizacion_parcial_no_modifica_otros_campos_docente(client_pg):
+    creado = client_pg.post("/teachers/", json=DOCENTE).json()
+    client_pg.put(f"/teachers/{creado['id']}", json={"nombre": "Ana Nuevo"})
+    obtenido = client_pg.get(f"/teachers/{creado['id']}").json()
+    assert obtenido["email"] == DOCENTE["email"]
+    assert obtenido["especialidad"] == DOCENTE["especialidad"]
+
+
+@skip_if_no_pg
+def test_pg_docente_cuerpo_vacio_no_modifica(client_pg):
+    creado = client_pg.post("/teachers/", json=DOCENTE).json()
+    resp = client_pg.put(f"/teachers/{creado['id']}", json={})
+    assert resp.status_code == 200
+    assert resp.json()["nombre"] == DOCENTE["nombre"]
+    assert resp.json()["especialidad"] == DOCENTE["especialidad"]
+
+
+# ===========================================================================
+# Utilidades
+# ===========================================================================
+
+@skip_if_no_pg
+def test_pg_health_check_con_bd_real(client_pg):
+    resp = client_pg.get("/health")
+    assert resp.status_code == 200
+    assert resp.json()["base_de_datos"] == "ok"
